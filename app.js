@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const ejs = require('ejs');
 
+const pageRoute = require("./routes/pageRoute")
+
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -15,17 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // ROUTES
-app.get('/', (req, res) => {
-  res.status(200).render('index', {
-    page_name: 'index',
-  });
-});
-
-app.get('/about', (req, res) => {
-  res.status(200).render('about', {
-    page_name: 'about',
-  });
-});
+app.use('/', pageRoute);
 
 // LISTEN
 app.listen(PORT, () => {
